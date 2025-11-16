@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -13,9 +13,8 @@ type Props = {
   data: Metric[];
 };
 
-export const Chart: React.FC<Props> = ({ data }) => {
-  // format timestamps for display
-  const formatted = React.useMemo(() => {
+const ChartComponent: React.FC<Props> = ({ data }) => {
+  const formatted = useMemo(() => {
     if (!data?.length) return [];
     return data.map((item) => ({
       ...item,
@@ -24,7 +23,7 @@ export const Chart: React.FC<Props> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="chart-wrapper" style={{ height: 240 }}>
+    <div style={wrapperStyle}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatted}>
           <XAxis dataKey="label" />
@@ -36,4 +35,10 @@ export const Chart: React.FC<Props> = ({ data }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+export const Chart = React.memo(ChartComponent);
+
+const wrapperStyle: React.CSSProperties = {
+  height: 240,
 };

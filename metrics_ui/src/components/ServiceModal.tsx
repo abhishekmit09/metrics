@@ -7,20 +7,18 @@ type Props = {
   onClose: () => void;
 };
 
-export const ServiceModal: React.FC<Props> = ({ serviceName, onClose }) => {
+function ServiceModal({ serviceName, onClose }: Props) {
   const { state } = useMetrics();
+  const svc = serviceName ? state.services[serviceName] : undefined;
 
-  if (!serviceName) return null;
-
-  const svc = state.services[serviceName];
   if (!svc) return null;
 
-  const latest = svc.latest;
+  const { latest } = svc;
 
   return (
-    <div style={overlay}>
-      <div style={modal}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div style={overlayStyle}>
+      <div style={modalStyle}>
+        <div style={headerStyle}>
           <h2 style={{ margin: 0 }}>{serviceName}</h2>
           <button onClick={onClose}>Close</button>
         </div>
@@ -37,10 +35,13 @@ export const ServiceModal: React.FC<Props> = ({ serviceName, onClose }) => {
       </div>
     </div>
   );
-};
+}
+
+export default React.memo(ServiceModal);
 
 
-const overlay: React.CSSProperties = {
+
+const overlayStyle: React.CSSProperties = {
   position: "fixed",
   inset: 0,
   background: "rgba(0, 0, 0, 0.4)",
@@ -50,10 +51,16 @@ const overlay: React.CSSProperties = {
   paddingTop: 40,
 };
 
-const modal: React.CSSProperties = {
+const modalStyle: React.CSSProperties = {
   background: "#fff",
   borderRadius: 8,
   padding: "20px 24px",
   width: "70%",
   maxWidth: 760,
+};
+
+const headerStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
 };
