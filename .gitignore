@@ -1,0 +1,25 @@
+# -----------------------------
+# Node Modules (explicit paths)
+# -----------------------------
+metrics_ui/node_modules/
+backendAPI/node_modules/
+
+# Also ignore any nested node_modules just in case
+**/node_modules/
+
+
+# -----------------------------
+# Build Output
+# -----------------------------
+metrics_ui/build/
+backendAPI/dist/
+backendAPI/public/
+
+# -----------------------------
+# Misc
+# -----------------------------
+*.tmp
+*.temp
+*.orig
+.svn/
+.hg/
