@@ -117,7 +117,7 @@ cd <repo-folder>
 ---
 📦 Installation & Setup
 1. Clone the repository
-git clone <your-public-github-repo-url>
+git clone https://github.com/abhishekmit09/metrics
 cd <repo-folder>
 🛠️ Run Locally (Without Docker)
 Backend
